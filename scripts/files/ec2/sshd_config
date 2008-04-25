@@ -1,0 +1,9 @@
+Protocol 2
+StrictModes yes
+MaxStartups 10:30:60
+Ciphers aes256-cbc,aes256-ctr
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+Subsystem sftp /usr/lib/misc/sftp-server
+UseDNS no
+

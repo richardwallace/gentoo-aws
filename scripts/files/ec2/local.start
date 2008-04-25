@@ -1,0 +1,4 @@
+# /etc/conf.d/local.start
+
+/usr/local/bin/ec2-init.sh
+
