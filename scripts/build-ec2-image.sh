@@ -78,9 +78,9 @@ function chroot_ec2_ebuilds() {
 	env-update > /dev/null 2>&1
 	source /etc/profile > /dev/null 2>&1
 
-	echo -n ">> Installing cloudapi overlay.. "
-	echo 'PORTDIR_OVERLAY=/usr/local/cloudapi-portage' >> /etc/make.conf
-	svn -q checkout http://cloudapi.googlecode.com/svn/trunk/gentoo/overlay /usr/local/cloudapi-portage
+	echo -n ">> Installing gentoo-aws overlay.. "
+	echo 'PORTDIR_OVERLAY=/usr/local/gentoo-aws' >> /etc/make.conf
+	svn -q checkout http://gentoo-aws.googlecode.com/svn/trunk/overlay /usr/local/gentoo-aws
 	echo "done"
 
 	echo -n ">> Installing ec2 tools.. "

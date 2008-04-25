@@ -1,4 +1,5 @@
 # /etc/conf.d/local.start
 
+emerge --sync
 /usr/local/bin/ec2-init.sh
 
