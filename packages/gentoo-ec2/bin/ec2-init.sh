@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source /etc/conf.d/ec2
+BINDIR=${BINDIR-/usr/local/bin}
 
 # initialize all ec2 data
 
