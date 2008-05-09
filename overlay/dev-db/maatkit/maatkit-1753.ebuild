@@ -5,7 +5,7 @@ HOMEPAGE="http://sourceforge.net/projects/maatkit/"
 SRC_URI="mirror://sourceforge/maatkit/${P}.tar.gz"
 
 LICENSE="|| ( Artistic GPL-2 )"
-KEYWORDS="~x86"
+KEYWORDS="~x86 ~amd64"
 SLOT="0"
 IUSE=""
 
