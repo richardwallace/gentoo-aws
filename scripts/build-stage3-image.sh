@@ -85,7 +85,7 @@ function preconfigure_image() {
 	echo "done"
 
 	echo -n ">> Setting profile to $ARCH_KEYWORD.. "
-	ln -fns ../usr/portage/profiles/default-linux/$ARCH_KEYWORD/$RELEASE /mnt/image-fs/etc/make.profile
+	ln -fns ../usr/portage/profiles/default-linux/$ARCH_KEYWORD/2007.0 /mnt/image-fs/etc/make.profile
 	echo "done"
 }
 
