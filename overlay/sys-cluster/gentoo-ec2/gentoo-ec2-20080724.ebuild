@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-inherit eutils subversion
+inherit eutils git
 
 DESCRIPTION="A set of scripts for running a gentoo ec2 instance"
 HOMEPAGE="http://code.google.com/p/gentoo-aws"
 
-ESVN_REPO_URI="http://gentoo-aws.googlecode.com/svn/trunk/packages/gentoo-ec2/"
-ESVN_PROJECT="gentoo-ec2"
+EGIT_REPO_URI="git://github.com/dkubb/gentoo-aws.git"
+EGIT_PROJECT="gentoo-ec2"
 SRC_URI=""
 
 LICENSE="as-is"

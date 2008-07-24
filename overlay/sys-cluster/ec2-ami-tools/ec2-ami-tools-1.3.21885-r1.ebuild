@@ -6,7 +6,7 @@ inherit eutils
 
 DESCRIPTION="Amazon EC2 AMI Tools"
 HOMEPAGE="http://developer.amazonwebservices.com/connect/entry.jspa?entryID=368&ref=featured"
-SRC_URI="http://s3.amazonaws.com/ec2-downloads/ec2-ami-tools-1.3-20041.zip"
+SRC_URI="http://s3.amazonaws.com/ec2-downloads/ec2-ami-tools-1.3-21885.zip"
 LICENSE="as-is"
 
 SLOT="0"
@@ -16,7 +16,7 @@ IUSE=""
 RDEPEND="dev-lang/ruby net-misc/curl"
 DEPEND="${RDEPEND}"
 
-S=${WORKDIR}/ec2-ami-tools-1.3-20041
+S=${WORKDIR}/ec2-ami-tools-1.3-21885
 
 src_install () {
 	insinto /usr/lib/aes/amiutil/lib 

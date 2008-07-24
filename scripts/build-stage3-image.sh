@@ -2,7 +2,7 @@
 
 # builds a generic image from a stage3 tarball and portage snapshot
 
-RELEASE="2007.0"
+RELEASE="2008.0"
 IMAGESIZE="5120"
 PACKAGES="wget vim subversion zip unzip screen openssh gentoolkit ruby"
 PACKAGES="$PACKAGES net-misc/whois net-dns/bind-tools net-misc/telnet-bsd curl"
@@ -35,6 +35,13 @@ function build_image() {
 	mke2fs -q -F -j $IMAGEFILE > /dev/null
 	mkdir /mnt/image-fs
 	mount -o loop $IMAGEFILE /mnt/image-fs > /dev/null
+	echo "done"
+
+	echo -n ">> Download stage3 and portage.. "
+	curl -sO "http://gentoo.osuosl.org/releases/x86/current/stages/stage3-$ARCH-$RELEASE.tar.bz2"
+	mv "stage3-$ARCH-$RELEASE.tar.bz2" "$FILE_STAGE3"
+	curl -sO http://gentoo.osuosl.org/snapshots/portage-latest.tar.bz2
+	mv portage-latest.tar.bz2 "$FILE_PORTAGESNAPSHOT"
 	echo "done"
 
 	echo -n ">> Extracting stage3 and portage.. "
@@ -199,7 +206,7 @@ fi
 # file paths
 FILE_SCRIPT=$(which $0)
 FILE_BASEDIR=$(dirname $FILE_SCRIPT)
-FILE_STAGE3="$FILE_BASEDIR/files/stage3-$ARCH_KEYWORD-$RELEASE.tar.bz2"
+FILE_STAGE3="$FILE_BASEDIR/files/stage3-$ARCH-$RELEASE.tar.bz2"
 FILE_PORTAGESNAPSHOT="$FILE_BASEDIR/files/portage-latest.tar.bz2"
 FILE_MAKECONF="$FILE_BASEDIR/files/make.$ARCH.conf"
 FILE_LOCALEGEN="$FILE_BASEDIR/files/locale.gen"

@@ -21,7 +21,7 @@ if [ $KERNEL = '2.6.18-xenU-ec2-v1.0' ] ; then
 		MODZIP=ec2-modules-2.6.18-xenU-x86_64.tgz
 	else
 		MODHOST=http://ec2-downloads.s3.amazonaws.com/
-		MODZIP=ec2-modules-2.6.18-xenU-x86_64.tgz
+		MODZIP=ec2-modules-2.6.18-xenU-i686.tgz
 	fi
 
 	wget ${MODHOST}$MODZIP
