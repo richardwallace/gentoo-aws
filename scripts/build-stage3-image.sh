@@ -135,13 +135,13 @@ function chroot_configure_image() {
 	echo "done"
 
 	echo -n ">> Tuning TCP settings.. "
-	echo -n "net.core.rmem_max = 16777216" >>/etc/sysctl.conf
-	echo -n "net.core.wmem_max = 16777216" >>/etc/sysctl.conf
-	echo -n "net.ipv4.tcp_rmem = 4096 87380 16777216" >>/etc/sysctl.conf
-	echo -n "net.ipv4.tcp_wmem = 4096 65536 16777216" >>/etc/sysctl.conf
-	echo -n "net.ipv4.tcp_no_metrics_save = 1" >>/etc/sysctl.conf
-	echo -n "net.ipv4.tcp_moderate_rcvbuf = 1" >>/etc/sysctl.conf
-	echo -n "net.core.netdev_max_backlog = 2500" >>/etc/sysctl.conf
+	echo "net.core.rmem_max = 16777216" >>/etc/sysctl.conf
+	echo "net.core.wmem_max = 16777216" >>/etc/sysctl.conf
+	echo "net.ipv4.tcp_rmem = 4096 87380 16777216" >>/etc/sysctl.conf
+	echo "net.ipv4.tcp_wmem = 4096 65536 16777216" >>/etc/sysctl.conf
+	echo "net.ipv4.tcp_no_metrics_save = 1" >>/etc/sysctl.conf
+	echo "net.ipv4.tcp_moderate_rcvbuf = 1" >>/etc/sysctl.conf
+	echo "net.core.netdev_max_backlog = 2500" >>/etc/sysctl.conf
 	sysctl -p
 	echo "done"
 
