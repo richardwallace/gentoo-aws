@@ -4,7 +4,7 @@
 
 RELEASE="2008.0"
 IMAGESIZE="5120"
-PACKAGES="wget vim subversion zip unzip screen openssh gentoolkit ruby"
+PACKAGES="wget vim dev-util/git zip unzip screen openssh gentoolkit ruby"
 PACKAGES="$PACKAGES net-misc/whois net-dns/bind-tools net-misc/telnet-bsd curl"
 
 # fail on any error
@@ -150,6 +150,9 @@ function chroot_update_image() {
 	echo -n ">> Cleaning portage.. "
 	emerge --depclean
 	revdep-rebuild
+	hash -r
+	grpck
+	grpconv
 	eclean -d distfiles
 	eclean -d packages
 

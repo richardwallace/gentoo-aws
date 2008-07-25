@@ -148,7 +148,7 @@ ARCH=${ARCH-"x86"}
 
 # valid parameters
 if [ -z "$IMAGEFILE" ] ; then
-	echo "Must provide a valid image file"
+	echo "Must provide a valid image file with -i"
 	exit 1
 fi
 
