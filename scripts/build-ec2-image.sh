@@ -82,6 +82,7 @@ function chroot_ec2_ebuilds() {
 	echo 'PORTDIR_OVERLAY=/usr/local/gentoo-aws' >> /etc/make.conf
 	git clone git://github.com/dkubb/gentoo-aws.git
 	mv -f gentoo-aws/overlay /usr/local/gentoo-aws
+	rm -rf gentoo-aws/
 	echo "done"
 
 	echo -n ">> Installing ec2 tools.. "

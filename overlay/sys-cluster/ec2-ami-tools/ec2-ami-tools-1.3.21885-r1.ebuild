@@ -19,7 +19,7 @@ DEPEND="${RDEPEND}"
 S=${WORKDIR}/ec2-ami-tools-1.3-21885
 
 src_install () {
-	insinto /usr/lib/aes/amiutil/lib 
+	insinto /usr/lib/aes/amiutil/lib
 	doins -r ${S}/lib/*
 
 	insinto /etc
@@ -35,6 +35,6 @@ src_install () {
 		ln -s /usr/lib/aes/amiutil/$target ${D}/usr/bin/${base}
 	done
 
-        dodir /etc/env.d
-        echo "EC2_AMITOOL_HOME=/usr/lib/aes/amiutil" >> ${D}/etc/env.d/99ec2
+	dodir /etc/env.d
+	echo "EC2_AMITOOL_HOME=/usr/lib/aes/amiutil" >> ${D}/etc/env.d/99ec2
 }
