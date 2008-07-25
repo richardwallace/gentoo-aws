@@ -7,9 +7,15 @@ PACKAGES="ec2-ami-tools ec2-api-tools gentoo-ec2"
 # unmounts the image
 # --------------------------
 function unmount_image() {
-	mount | grep -q /mnt/image-fs/dev && umount -f /mnt/image-fs/dev
-	mount | grep -q /mnt/image-fs/proc && umount -f /mnt/image-fs/proc
-	mount | grep -q /mnt/image-fs && umount -f /mnt/image-fs
+	while (mount | grep -q /mnt/image-fs/dev); do
+		umount -f /mnt/image-fs/dev
+	done
+	while (mount | grep -q /mnt/image-fs/proc); do
+		umount -f /mnt/image-fs/proc
+	done
+	while (mount | grep -q /mnt/image-fs); do
+		umount -f /mnt/image-fs
+	done
 }
 
 # clean up from previous attempts
@@ -17,9 +23,7 @@ function unmount_image() {
 function cleanup() {
 	if [[ -d /mnt/image-fs ]]; then
 	echo -n ">> Removing /mnt/image-fs.. "
-	mount | grep -q /mnt/image-fs/dev && umount -f /mnt/image-fs/dev
-	mount | grep -q /mnt/image-fs/proc && umount -f /mnt/image-fs/proc
-	mount | grep -q /mnt/image-fs && umount -f /mnt/image-fs
+	unmount_image
 	rm -rf /mnt/image-fs
 	echo "done"
 	fi
