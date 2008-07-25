@@ -24,7 +24,7 @@ function cleanup() {
 	if [[ -d /mnt/image-fs ]]; then
 	echo -n ">> Removing /mnt/image-fs.. "
 	unmount_image
-	rm -rf /mnt/image-fs
+	rmdir /mnt/image-fs
 	echo "done"
 	fi
 }
