@@ -83,6 +83,7 @@ function chroot_ec2_ebuilds() {
 	rm -rf /mnt/image-fs/usr/local/gentoo-aws/
 	git clone git://github.com/dkubb/gentoo-aws.git
 	mv -f gentoo-aws/overlay /usr/local/gentoo-aws
+	mv -f gentoo-aws/packages/gentoo-ec2/bin/* /usr/local/bin/.
 	rm -rf gentoo-aws/
 	echo "done"
 
