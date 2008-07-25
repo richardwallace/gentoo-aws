@@ -10,15 +10,27 @@ PACKAGES="$PACKAGES net-misc/whois net-dns/bind-tools net-misc/telnet-bsd curl"
 # fail on any error
 set -e
 
+# unmounts the image
+# --------------------------
+function unmount_image() {
+	while (mount | grep -q /mnt/image-fs/dev); do
+		umount -f /mnt/image-fs/dev
+	done
+	while (mount | grep -q /mnt/image-fs/proc); do
+		umount -f /mnt/image-fs/proc
+	done
+	while (mount | grep -q /mnt/image-fs); do
+		umount -f /mnt/image-fs
+	done
+}
+
 # Cleans up any leftovers from a previous execution
 # --------------------------
 function cleanup() {
 	if [[ -d /mnt/image-fs ]]; then
 	echo -n ">> Removing /mnt/image-fs.. "
-	mount | grep -q /mnt/image-fs/dev && umount -f /mnt/image-fs/dev
-	mount | grep -q /mnt/image-fs/proc && umount -f /mnt/image-fs/proc
-	mount | grep -q /mnt/image-fs && umount -f /mnt/image-fs
-	rm -rf /mnt/image-fs
+	unmount_image
+	rmdir /mnt/image-fs
 	echo "done"
 	fi
 }
