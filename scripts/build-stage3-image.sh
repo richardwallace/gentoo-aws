@@ -28,41 +28,11 @@ function unmount_image() {
 # --------------------------
 function cleanup() {
 	if [[ -d /mnt/image-fs ]]; then
-	echo -n ">> Removing /mnt/image-fs.. "
-	unmount_image
-	rmdir /mnt/image-fs
-	echo "done"
+		echo -n ">> Removing /mnt/image-fs.. "
+		unmount_image
+		rmdir /mnt/image-fs
+		echo "done"
 	fi
-}
-
-# Builds an image filesystem, mounts it ready for configuration
-# --------------------------
-function build_image() {
-	echo ">> Creating $ARCH image"
-	echo -n ">> Creating basic image (${IMAGESIZE}Mb).. "
-	dd if=/dev/zero of=$IMAGEFILE bs=1M count=$IMAGESIZE > /dev/null 2>&1
-	echo "done"
-
-	echo -n ">> Mounting $IMAGEFILE in /mnt/image-fs.. "
-	mke2fs -q -F -j $IMAGEFILE > /dev/null
-	mkdir /mnt/image-fs
-	mount -o loop $IMAGEFILE /mnt/image-fs > /dev/null
-	echo "done"
-
-	echo -n ">> Download stage3 and portage.. "
-	curl -sO "http://gentoo.osuosl.org/releases/x86/current/stages/stage3-$ARCH-$RELEASE.tar.bz2"
-	mv "stage3-$ARCH-$RELEASE.tar.bz2" "$FILE_STAGE3"
-	curl -sO http://gentoo.osuosl.org/snapshots/portage-latest.tar.bz2
-	mv portage-latest.tar.bz2 "$FILE_PORTAGESNAPSHOT"
-	echo "done"
-
-	echo -n ">> Extracting stage3 and portage.. "
-	OLDCWD=`pwd`
-	cd /mnt/image-fs
-	tar xjpf "$FILE_STAGE3"
-	tar xjf "$FILE_PORTAGESNAPSHOT" -C /mnt/image-fs/usr
-	cd $OLDCWD
-	echo "done"
 }
 
 # Mounts an image in /mnt/image-fs
@@ -73,9 +43,36 @@ function mount_image() {
 		exit 1
 	fi
 
-	echo -n ">> Mounting $1.. "
+	echo -n ">> Mounting $1 in /mnt/image-fs.. "
 	mkdir /mnt/image-fs
 	mount -o loop $1 /mnt/image-fs > /dev/null
+	echo "done"
+}
+
+# Builds an image filesystem, mounts it ready for configuration
+# --------------------------
+function build_image() {
+	if [ ! -f $IMAGEFILE ] ; then
+		echo ">> Creating $ARCH image"
+		echo -n ">> Creating basic image (${IMAGESIZE}Mb).. "
+		dd if=/dev/zero of=$IMAGEFILE bs=1M count=$IMAGESIZE > /dev/null 2>&1
+		mke2fs -q -F -j $IMAGEFILE > /dev/null
+		echo "done"
+  fi
+
+	mount_image $IMAGEFILE
+
+	echo -n ">> Download stage3 and portage.. "
+	curl -s "http://gentoo.osuosl.org/releases/x86/current/stages/stage3-$ARCH-$RELEASE.tar.bz2" -o "$FILE_STAGE3"
+	curl -s http://gentoo.osuosl.org/snapshots/portage-latest.tar.bz2 -o "$FILE_PORTAGESNAPSHOT"
+	echo "done"
+
+	echo -n ">> Extracting stage3 and portage.. "
+	OLDCWD=`pwd`
+	cd /mnt/image-fs
+	tar xjpf "$FILE_STAGE3"
+	tar xjf "$FILE_PORTAGESNAPSHOT" -C /mnt/image-fs/usr
+	cd $OLDCWD
 	echo "done"
 }
 

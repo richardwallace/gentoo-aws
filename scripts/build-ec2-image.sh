@@ -18,21 +18,26 @@ function unmount_image() {
 	done
 }
 
-# clean up from previous attempts
+# Cleans up any leftovers from a previous execution
 # --------------------------
 function cleanup() {
 	if [[ -d /mnt/image-fs ]]; then
-	echo -n ">> Removing /mnt/image-fs.. "
-	unmount_image
-	rmdir /mnt/image-fs
-	echo "done"
+		echo -n ">> Removing /mnt/image-fs.. "
+		unmount_image
+		rmdir /mnt/image-fs
+		echo "done"
 	fi
 }
 
-# mount the image
+# Mounts an image in /mnt/image-fs
 # --------------------------
 function mount_image() {
-	echo -n ">> Mounting $1.. "
+	if [ ! -f $1 ] ; then
+		echo "first parameter must be an image to mount"
+		exit 1
+	fi
+
+	echo -n ">> Mounting $1 in /mnt/image-fs.. "
 	mkdir /mnt/image-fs
 	mount -o loop $1 /mnt/image-fs > /dev/null
 	echo "done"
@@ -55,11 +60,11 @@ function inject_ec2_config() {
 # --------------------------
 function thin_image() {
 	if [[ -d /mnt/image-fs/usr/portage ]]; then
-	echo -n ">> Purging unneeded files.. "
-	cd /mnt/image-fs/usr/portage
-	rm -rf a* dev-* g* k* m* n* perl-* r* sci-* sec-* sys-* w* x*
-	rm -rf /mnt/image-fs/usr/portage/distfiles/*
-	echo "done"
+		echo -n ">> Purging unneeded files.. "
+		cd /mnt/image-fs/usr/portage
+		rm -rf a* dev-* g* k* m* n* perl-* r* sci-* sec-* sys-* w* x*
+		rm -rf /mnt/image-fs/usr/portage/distfiles/*
+		echo "done"
 	fi
 }
 
@@ -97,7 +102,7 @@ function chroot_ec2_ebuilds() {
 
 	echo -n ">> Installing ruby gems.. "
 	mkdir -p /tmp/updates
-	curl -o /tmp/updates/s3sync.gem http://s3.amazonaws.com/rightscale_software/s3sync-1.1.4.gem
+	curl http://s3.amazonaws.com/rightscale_software/s3sync-1.1.4.gem -o /tmp/updates/s3sync.gem
 	gem install /tmp/updates/s3sync.gem
 	echo "done"
 
