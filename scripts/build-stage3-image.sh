@@ -134,6 +134,10 @@ function chroot_configure_image() {
 	rc-update add net.eth0 default
 	echo "done"
 
+	echo -n ">> Turning off unecessary TTY processes.. "
+	perl -p -i -e 's/^c([^1])/\#c$1/g' /etc/inittab
+	echo "done"
+
 	echo -n ">> Tuning TCP settings.. "
 	echo "net.core.rmem_max = 16777216" >>/etc/sysctl.conf
 	echo "net.core.wmem_max = 16777216" >>/etc/sysctl.conf
