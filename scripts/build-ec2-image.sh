@@ -66,12 +66,9 @@ function inject_ec2_config() {
 function thin_image() {
 	if [[ -d /mnt/image-fs/usr/portage ]]; then
 		echo -n ">> Purging unneeded files.. "
-		emerge --depclean
-		revdep-rebuild
-		rm -rf /var/tmp/* /root
-		rm -rf /usr/portage/{a,dev-,g,k,m,n,perl-,r,sci-,sec-,sys-,w,x}*
-		rm -rf /usr/portage/distfiles/* /usr/portage/packages
-		symlinks -crsdv /
+		rm -rf  /mnt/image-fs/var/tmp/* /mnt/image-fs/root
+		rm -rf  /mnt/image-fs/usr/portage/{a,dev-,g,k,m,n,perl-,r,sci-,sec-,sys-,w,x}*
+		rm -rf  /mnt/image-fs/usr/portage/distfiles/*  /mnt/image-fs/usr/portage/packages
 		echo "done"
 	fi
 }
@@ -131,6 +128,11 @@ function chroot_ec2_ebuilds() {
 
 	rm -rf /tmp/updates
 	rm /root/configure.sh
+
+	emerge --depclean
+	revdep-rebuild
+
+	symlinks -crsdv /
 }
 
 # Main execution block
