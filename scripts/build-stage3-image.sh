@@ -13,6 +13,7 @@ set -e
 # unmounts the image
 # --------------------------
 function unmount_image() {
+	set +e
 	while (mount | grep -q /mnt/image-fs/dev); do
 		umount -f /mnt/image-fs/dev
 	done
@@ -22,6 +23,7 @@ function unmount_image() {
 	while (mount | grep -q /mnt/image-fs); do
 		umount -f /mnt/image-fs
 	done
+	set -e
 }
 
 # Cleans up any leftovers from a previous execution

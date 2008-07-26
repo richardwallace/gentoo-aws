@@ -4,9 +4,13 @@
 
 PACKAGES="ec2-ami-tools ec2-api-tools gentoo-ec2"
 
+# fail on any error
+set -e
+
 # unmounts the image
 # --------------------------
 function unmount_image() {
+	set +e
 	while (mount | grep -q /mnt/image-fs/dev); do
 		umount -f /mnt/image-fs/dev
 	done
@@ -16,6 +20,7 @@ function unmount_image() {
 	while (mount | grep -q /mnt/image-fs); do
 		umount -f /mnt/image-fs
 	done
+	set -e
 }
 
 # Cleans up any leftovers from a previous execution
@@ -68,7 +73,7 @@ function thin_image() {
 	fi
 }
 
-# Chroots into the image, executes a particular command
+# Chroots into the image, running this script with the configure_image target
 # --------------------------
 function chroot_image() {
 	echo -n ">> Chrooting image.. "
@@ -172,9 +177,6 @@ FILE_MAKECONF="$FILE_BASEDIR/files/ec2/make.$ARCH.conf"
 FILE_LOCALSTART="$FILE_BASEDIR/files/ec2/local.start"
 FILE_RSYNCEXCLUDE="$FILE_BASEDIR/files/ec2/portage.rsync_exclude"
 FILE_SSHDCONFIG="$FILE_BASEDIR/files/ec2/sshd_config"
-
-# fail on any error
-set -e
 
 case "$COMMAND" in
 
