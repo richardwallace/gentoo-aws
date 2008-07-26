@@ -68,7 +68,7 @@ function thin_image() {
 		echo -n ">> Purging unneeded files.. "
 		emerge --depclean
 		revdep-rebuild
-		rm -rf /var/tmp/*
+		rm -rf /var/tmp/* /root
 		rm -rf /usr/portage/{a,dev-,g,k,m,n,perl-,r,sci-,sec-,sys-,w,x}*
 		rm -rf /usr/portage/distfiles/* /usr/portage/packages
 		symlinks -crsdv /
