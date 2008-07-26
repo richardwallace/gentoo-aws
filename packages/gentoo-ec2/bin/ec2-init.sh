@@ -7,5 +7,4 @@ BINDIR=${BINDIR-/usr/local/bin}
 
 $BINDIR/ec2-get-metadata.sh
 $BINDIR/ec2-import-sshkeys.sh
-$BINDIR/ec2-import-sshkeys.sh
 $BINDIR/ec2-get-modules.sh

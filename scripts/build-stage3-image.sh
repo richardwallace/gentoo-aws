@@ -4,7 +4,7 @@
 
 RELEASE="2008.0"
 IMAGESIZE="5120"
-PACKAGES="wget vim dev-util/git zip unzip screen openssh gentoolkit ruby"
+PACKAGES="wget vim dev-util/git zip unzip screen openssh gentoolkit ruby symlinks"
 PACKAGES="$PACKAGES net-misc/whois net-dns/bind-tools net-misc/telnet-bsd curl"
 
 # fail on any error
@@ -60,7 +60,7 @@ function build_image() {
 		dd if=/dev/zero of=$IMAGEFILE bs=1M count=$IMAGESIZE > /dev/null 2>&1
 		mke2fs -q -F -j $IMAGEFILE > /dev/null
 		echo "done"
-  fi
+	fi
 
 	mount_image $IMAGEFILE
 
@@ -105,6 +105,7 @@ function preconfigure_image() {
 function chroot_image() {
 	echo -n ">> Chrooting image.. "
 	set +e
+	cat /proc/mounts >/mnt/image-fs/etc/mtab
 	mount -t proc none /mnt/image-fs/proc > /dev/null 2>&1
 	mount -o bind /dev /mnt/image-fs/dev > /dev/null 2>&1
 	set -e

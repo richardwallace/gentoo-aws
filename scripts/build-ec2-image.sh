@@ -66,9 +66,12 @@ function inject_ec2_config() {
 function thin_image() {
 	if [[ -d /mnt/image-fs/usr/portage ]]; then
 		echo -n ">> Purging unneeded files.. "
-		cd /mnt/image-fs/usr/portage
-		rm -rf a* dev-* g* k* m* n* perl-* r* sci-* sec-* sys-* w* x*
-		rm -rf /mnt/image-fs/usr/portage/distfiles/*
+		emerge --depclean
+		revdep-rebuild
+		rm -rf /var/tmp/*
+		rm -rf /usr/portage/{a,dev-,g,k,m,n,perl-,r,sci-,sec-,sys-,w,x}*
+		rm -rf /usr/portage/distfiles/* /usr/portage/packages
+		symlinks -crsdv /
 		echo "done"
 	fi
 }

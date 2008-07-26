@@ -2,6 +2,8 @@
 
 # imports public keys into the ssh authorized_keys file
 
+echo -n ">> Importing ssh keys.. "
+
 [ ! -e /root ] && cp -r /etc/skel /root
 
 # add keys into authorized keys
@@ -15,3 +17,5 @@ mv /root/.ssh/.authorized_keys /root/.ssh/authorized_keys
 
 # correct perms
 chmod 600 /root/.ssh/authorized_keys
+
+echo "done"

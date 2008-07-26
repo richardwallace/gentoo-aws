@@ -13,9 +13,10 @@ if [ -e /lib/modules/$KERNEL ] ; then
 	exit
 fi
 
+echo -n ">> Getting modules.. "
+
 # handle 2.6.18 kernel
 if [ $KERNEL = '2.6.18-xenU-ec2-v1.0' ] ; then
-
 	if [ $ARCH = 'x86_64' ] ; then
 		MODHOST=http://ec2-downloads.s3.amazonaws.com/
 		MODZIP=ec2-modules-2.6.18-xenU-x86_64.tgz
@@ -27,8 +28,6 @@ if [ $KERNEL = '2.6.18-xenU-ec2-v1.0' ] ; then
 	wget ${MODHOST}$MODZIP
 	tar xzvf $MODZIP -C /
 	ln -s /lib/modules/2.6.18-xenU /lib/modules/2.6.18-xenU-ec2-v1.0
-
 fi
 
-
-
+echo "done"

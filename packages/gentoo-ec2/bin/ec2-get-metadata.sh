@@ -15,6 +15,8 @@ mkdir -p $METADATA_DIR
 METADATA_KEYS=`wget -q -O - $METADATA_HOST | grep -v /`
 METADATA_DIRS=`wget -q -O - $METADATA_HOST | grep / | grep -v public-keys`
 
+echo -n ">> Getting meta-data.. "
+
 # enumerate simple metadata keys
 for KEY in $METADATA_KEYS ; do
 	wget -q -O - "$METADATA_HOST/$KEY" > $METADATA_DIR/$KEY
@@ -38,5 +40,7 @@ done
 
 # fetch raw user data
 wget -q -O - "$USERDATA_HOST" > $USERDATA_FILE
-exit 0
 
+echo "done"
+
+exit 0
