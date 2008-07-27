@@ -7,7 +7,7 @@ inherit eutils
 MY_P=${PN}-1.3-19403
 DESCRIPTION="Amazon EC2 Command Line Tools"
 HOMEPAGE="http://developer.amazonwebservices.com/connect/entry.jspa?externalID=351&categoryID=88"
-SRC_URI="http://s3.amazonaws.com/ec2-downloads/ec2-api-tools-1.3-19403.zip"
+SRC_URI="http://ec2-downloads.s3.amazonaws.com/ec2-api-tools-1.3-19403.zip"
 LICENSE="as-is"
 SLOT="0"
 KEYWORDS="x86 amd64"

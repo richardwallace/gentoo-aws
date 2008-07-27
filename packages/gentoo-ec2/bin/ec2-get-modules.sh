@@ -17,13 +17,8 @@ echo -n ">> Getting modules.. "
 
 # handle 2.6.18 kernel
 if [ $KERNEL = '2.6.18-xenU-ec2-v1.0' ] ; then
-	if [ $ARCH = 'x86_64' ] ; then
-		MODHOST=http://ec2-downloads.s3.amazonaws.com/
-		MODZIP=ec2-modules-2.6.18-xenU-x86_64.tgz
-	else
-		MODHOST=http://ec2-downloads.s3.amazonaws.com/
-		MODZIP=ec2-modules-2.6.18-xenU-i686.tgz
-	fi
+	MODHOST=http://ec2-downloads.s3.amazonaws.com/
+	MODZIP=ec2-modules-2.6.18-xenU-$ARCH.tgz
 
 	wget ${MODHOST}$MODZIP
 	tar xzvf $MODZIP -C /

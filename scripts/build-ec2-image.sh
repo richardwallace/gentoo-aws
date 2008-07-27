@@ -107,7 +107,7 @@ function chroot_ec2_ebuilds() {
 
 	echo -n ">> Installing ruby gems.. "
 	mkdir -p /tmp/updates
-	curl http://s3.amazonaws.com/rightscale_software/s3sync-1.1.4.gem -o /tmp/updates/s3sync.gem
+	curl http://rightscale_software.s3.amazonaws.com/s3sync-1.1.4.gem -o /tmp/updates/s3sync.gem
 	gem install /tmp/updates/s3sync.gem
 	echo "done"
 

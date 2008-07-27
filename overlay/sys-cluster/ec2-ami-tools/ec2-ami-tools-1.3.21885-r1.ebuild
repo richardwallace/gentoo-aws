@@ -6,7 +6,7 @@ inherit eutils
 
 DESCRIPTION="Amazon EC2 AMI Tools"
 HOMEPAGE="http://developer.amazonwebservices.com/connect/entry.jspa?entryID=368&ref=featured"
-SRC_URI="http://s3.amazonaws.com/ec2-downloads/ec2-ami-tools-1.3-21885.zip"
+SRC_URI="http://ec2-downloads.s3.amazonaws.com/ec2-ami-tools-1.3-21885.zip"
 LICENSE="as-is"
 
 SLOT="0"
