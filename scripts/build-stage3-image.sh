@@ -105,7 +105,7 @@ function preconfigure_image() {
 function chroot_image() {
 	echo -n ">> Chrooting image.. "
 	set +e
-	cat /proc/mounts >/mnt/image-fs/etc/mtab
+	cat /proc/mounts | grep -v /mnt/image-fs >/mnt/image-fs/etc/mtab
 	mount -t proc none /mnt/image-fs/proc > /dev/null 2>&1
 	mount -o bind /dev /mnt/image-fs/dev > /dev/null 2>&1
 	set -e
