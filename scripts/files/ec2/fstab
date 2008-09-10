@@ -1,4 +1,6 @@
 /dev/sda1 /        ext3  user_xattr          0 1
 /dev/sda2 /mnt     ext3  user_xattr          0 2
 /dev/sda3 swap     swap  sw                  0 0
+/dev/sdh /var/www/rails/rollbook     ext3 user_xattr,noauto                   0 0
+/dev/sdi /var/lib/postgresql     ext3 user_xattr,noauto                   0 0
 shm       /dev/shm tmpfs nodev,nosuid,noexec 0 0
